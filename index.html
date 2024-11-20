@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<cabeza>
+    <título></título>
+	<meta charset="utf-8" />
+    <script src="Scripts/jquery-1.9.1.min.js"></script>
+    <link href="Contenido/bootstrap.min.css" rel="hoja de estilo" />
+    <script src="Scripts/isRockFx.js"></script>
+    <guión>
+        $(función () {
+            $('#ButtonCal').click(
+                función () {
+                    //Los niños que se mudan a un nuevo hogar pueden quedarse sin hogar
+                    var para = { 'altura': $('#txbHeight').val(), 'peso': $('#txbWeight').val() };
+                    //API de prueba
+                    ExecuteAPI('Ejemplo', 'IMC', párrafo,
+			//呼叫WebAPI成功時運行的Función de devolución de llamada
+                        función (resultado) {
+                            alerta(resultado.Datos);
+                        }
+                        );
+                }
+                );
+        });
+    </script>
+</cabeza>
+<cuerpo>
+    <div class="fila" estilo="margen:10px">
+        <div class="col-md-12">
+            <div class="grupo-de-formularios">
+                Significado:
+                <input id="txbHeight" class="form-control" placeholder="請輸入身高" />
+                Nombre:
+                <input id="txbWeight" class="form-control" placeholder="請輸入體重" />
+                <br />
+                <button class="btn btn-primary" id="ButtonCal">計算</button>
+            </div>
+        </div>
+    </div>
+</cuerpo>
+</html>
